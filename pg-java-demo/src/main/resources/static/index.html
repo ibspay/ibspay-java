@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>PGDemo</title>
+
+</head>
+<body>
+<div id="head" style=" weight:100%; height:30px; background-color: aqua;text-align: left">&nbsp;&nbsp;&nbsp;settle
+    accounts
+</div>
+<div style="text-align: center;">
+    <h1>0.01¥ 银行卡支付结算</h1>
+    <input id="credit" type="radio" name="bankCardType" value="CREDIT_CARD">信用卡&nbsp<input id="deit" type="radio"
+                                                                                           name="bankCardType"
+                                                                                           value="DEBIT_CARD" checked>借记卡<br>
+    &nbsp银行卡号：<input id="cardNumber" type="text" name="number"/><br><br>
+    &nbsp银行代码：<input id="bankType" type="text" name="bankcode"><br><br>
+    <div id="cdd" style="display:none">
+        银行安全码：<input id="cvv2" type="text"><br><br>
+        银行有效期：<input id="valid" type="text"><br><br>
+    </div>
+    &nbsp&nbsp&nbsp&nbsp持卡人：<input id="name" type="text" name="payername"/><br><br>
+    &nbsp身份证号：<input id="idNumber" type="text" name="citizenIdNumber"/><br><br>
+    银行预留手机号：<input type="text" id="phone" name="phone"/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<br><br>
+    &nbsp&nbsp&nbsp验证码：<input id="verifyCode" type="text" name="verifyCode"/><br><br>
+    <button id="verify" value="获取验证码" style="width: 90px;height:30px;background-color: cadetblue;border: 0">获取验证码
+    </button>
+    <button id="confirm" style="width: 90px;height:30px;background-color: cadetblue;border: 0">确认支付</button>
+</div>
+
+</body>
+
+
+<script src="https://cdn.bootcss.com/jquery/2.2.2/jquery.min.js"></script>
+<script>
+
+    $("#credit").on("click", function () {
+        $("#cdd").show();
+    });
+    $("#deit").on("click", function () {
+        $("#cdd").hide();
+    });
+    var bankcard = new Object();
+    var id = new Object();
+    id.paymentId = "";
+    $("#verify").on("click", function () {
+        bankcard.number = $("#cardNumber").val();
+        bankcard.holderIdNumber = $("#idNumber").val();
+        bankcard.holderName = $("#name").val();
+        bankcard.holderPhone = $("#phone").val();
+        bankcard.holderIdType = "IDENTITY_CARD";
+        var payer = new Object();
+        payer.payment_method = $("input[name='bankCardType']:checked").val();
+        if (payer.payment_method == "CREDIT_CARD") {
+            bankcard.cvv2 = $("#cvv2").val();
+            bankcard.validDate = $("#valid").val();
+        }
+        bankcard.bankCode = $("#bankType").val().toUpperCase();
+
+        $.ajax({
+            type: 'POST',
+            url: "pay/placeOrder",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            data: JSON.stringify(bankcard),
+            success: function (data) {
+                console.log(data);
+
+                id = JSON.parse(data);
+                console.log(id);
+
+            },
+            error: function (err) {
+                console.log(err);
+            }
+        });
+    });
+
+    $("#confirm").on("click", function () {
+        var verify_code = $("#verifyCode").val();
+        var condata = {"code": verify_code, "paymentId": id.paymentId};
+        console.log({"code": verify_code, "paymentId": id.paymentId});
+        $.ajax("pay/confirm", {
+            method: "POST",
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify(condata),
+            dataType: "json",
+            success: function (data) {
+                alert(data);
+                console.log(data);
+            },
+            error: function (err) {
+                console.log(err);
+            }
+        })
+
+    });
+</script>
+</html>

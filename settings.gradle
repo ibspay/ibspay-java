@@ -1,0 +1,3 @@
+rootProject.name = 'pg-java'
+include ':pg-java'
+include ':pg-java-demo'
