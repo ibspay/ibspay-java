@@ -12,6 +12,7 @@ buildscript {
 subprojects {
 
     group 'cn.payingcloud'
+    version '1.0.0'
 
     apply plugin: 'java'
 
@@ -20,5 +21,14 @@ subprojects {
     repositories {
         mavenLocal()
         jcenter()
+    }
+
+    apply plugin: 'com.bmuschko.docker-remote-api'
+    docker {
+        registryCredentials {
+            url = 'registry-internal.cn-beijing.aliyuncs.com'
+            username = project.hasProperty('dockerUser') ? project.property('dockerUser') : '<dockerUser>'
+            password = project.hasProperty('dockerPassword') ? project.property('dockerPassword') : '<dockerPassword>'
+        }
     }
 }

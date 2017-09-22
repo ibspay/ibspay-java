@@ -30,17 +30,9 @@ docker {
     }
 }
 
-ext {
-    dockerImageName = 'registry.cn-beijing.aliyuncs.com/payingcloud/demo:' + new SimpleDateFormat("yyyyMMddHHmmss").format(new Date())
-}
-
 task dockerBuild(type: DockerBuildImage, dependsOn: bootRepackage) {
-    copy {
-        from("src/main/docker/Dockerfile")
-        into("build/libs")
-    }
-    inputDir = file('build/libs')
-    tag = dockerImageName
+    inputDir = projectDir
+    tag = docker.registryCredentials.url + '/ibs/pg-java-demo:' + project.version
 }
 
 task dockerPush(type: DockerPushImage, dependsOn: dockerBuild) {
