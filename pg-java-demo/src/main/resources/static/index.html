@@ -3,32 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <title>PGDemo</title>
+    <style>
+        .date{
+            display: none
+        }
+        .CN{
+            display: none
+        }
 
+
+    </style>
 </head>
 <body>
-<div id="head" style=" weight:100%; height:30px; background-color: aqua;text-align: left">&nbsp;&nbsp;&nbsp;settle
-    accounts
+<div id="head" style=" weight:100%; height:30px; background-color: aqua;text-align: left">&nbsp;&nbsp;&nbsp;<select id="lan">
+    <option value="EN" style="border: 0">English</option>
+    <option value="CN">中文</option>
+</select>
 </div>
 <div style="text-align: center;">
-    <h1>0.01¥ 银行卡支付结算</h1>
+    <h1>0.01¥ <span class="EN">Bank card payment</span><span class="CN">银行卡支付结算</span></h1>
     <form action="/pay/placeOrder" method="post">
-    <input id="credit" type="radio" name="bankCardType" value="CREDIT_CARD">信用卡&nbsp<input id="deit" type="radio"
-                                                                                           name="bankCardType"
-                                                                                           value="DEBIT_CARD" checked>借记卡<br>
-    &nbsp银行卡号：<input id="cardNumber" type="text" name="number" autocomplete="on"/><br><br>
-    &nbsp银行代码：<input id="bankType" type="text" name="bankcode" autocomplete="on"><br><br>
+        <input id="credit" type="radio" name="bankCardType" value="CREDIT_CARD"><span class="CN">信用卡</span><span class="EN">Credit Card</span>&nbsp<input id="deit" type="radio" name="bankCardType" value="DEBIT_CARD" checked><span class="CN">借记卡</span><span class="EN">Debit Card</span><br>
+        <span class="CN">&nbsp银行卡号</span><span class="EN">Card Number</span>：<input id="cardNumber" type="text" name="number" autocomplete="on"/><br><br>
+        <span class="CN">&nbsp银行代码</span><span class="EN">&nbsp&nbsp&nbsp&nbspBank Code</span>：<input id="bankType" type="text" name="bankcode" autocomplete="on"><br><br>
     <div id="cdd" style="display:none">
-        银行安全码：<input id="cvv2" type="text"><br><br>
-        银行有效期：<input id="valid" type="text"><br><br>
+        <span class="CN">银行安全码</span><span class="EN">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspCVV2</span>：<input id="cvv2" type="text"><br><br>
+        <span class="CN">银行有效期</span><span class="EN">&nbsp&nbsp&nbsp&nbspValid Date</span>：<input id="valid" type="text"><span id="date" class="date">example："201701"</span><br><br>
     </div>
-    &nbsp&nbsp&nbsp&nbsp持卡人：<input id="name" type="text" name="payername" autocomplete="on"/><br><br>
-    &nbsp身份证号：<input id="idNumber" type="text" name="citizenIdNumber" autocomplete="on"/><br><br>
-    银行预留手机号：<input type="text" id="phone" name="phone" autocomplete="on"/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<br><br>
-    &nbsp&nbsp&nbsp验证码：<input id="verifyCode" type="text" name="verifyCode" autocomplete="on"/><br><br>
+        <span class="CN">&nbsp&nbsp&nbsp&nbsp持卡人</span><span class="EN">Holder Name</span>：<input id="name" type="text" name="payername" autocomplete="on"/><br><br>
+        <span class="CN">&nbsp身份证号</span><span class="EN">&nbsp&nbsp&nbsp&nbspID Number</span>：<input id="idNumber" type="text" name="citizenIdNumber" autocomplete="on"/><br><br>
+        <span class="CN">银行预留手机号</span><span class="EN">Bank Reserved Phone</span>：<input type="text" id="phone" name="phone" autocomplete="on"/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<br><br>
+        &nbsp&nbsp&nbsp<span class="CN">验证码</span><span class="EN">Verify Code</span>：<input id="verifyCode" type="text" name="verifyCode" autocomplete="on"/><br><br>
     </form>
-    <button id="verify" value="获取验证码" style="width: 90px;height:30px;background-color: cadetblue;border: 0">获取验证码
+    <button id="verify" value="获取验证码" style="width: 90px;height:30px;background-color: cadetblue;border: 0">Verify
     </button>
-    <button id="confirm" style="width: 90px;height:30px;background-color: cadetblue;border: 0">确认支付</button>
+    <button id="confirm" style="width: 90px;height:30px;background-color: cadetblue;border: 0">Confirm</button>
 </div>
 
 </body>
@@ -36,6 +45,36 @@
 
 <script src="https://cdn.bootcss.com/jquery/2.2.2/jquery.min.js"></script>
 <script>
+    $("#lan").bind("change",function(){
+        if($(this).val()=="CN"){
+            $(".CN").css({
+                "display":"inline-block"
+            });
+            $(".EN").css({
+                "display":"none"
+            })
+        }else{
+            $(".CN").css({
+                "display":"none"
+            });
+            $(".EN").css({
+                "display":"inline-block"
+            })
+        }
+
+    })
+    $("#valid").on({
+        focus:function () {
+                $("#date").css({
+                    "display":"inline-block"
+                })
+            },
+        blur:function () {
+            $("#date").css({
+                "display":"none"
+            })
+        }
+    });
 
     $("#credit").on("click", function () {
         $("#cdd").show();
@@ -63,8 +102,10 @@
             url: "pay/placeOrder",
             contentType: "application/json; charset=utf-8",
             data: JSON.stringify(bankcard),
-            success: function () {
-                alert("填写验证码");
+            dataType:"text",
+            success: function (data) {
+                alert(data);
+                console.log(data);
             },
             error: function (err) {
                 console.log(err);
@@ -74,11 +115,13 @@
 
     $("#confirm").on("click", function () {
         var verify_code = $("#verifyCode").val();
+        if(verify_code==null||verify_code==""){
+            alert("please input the verify code")
+        }else{
         $.ajax("pay/confirm", {
             method: "POST",
             contentType: "text/xml; charset=utf-8",
             data: verify_code,
-            dataType: "json",
             success: function (data) {
                 alert("success");
                 console.log(data);
@@ -86,7 +129,7 @@
             error: function (err) {
                 console.log(err);
             }
-        })
+        })}
 
     });
 </script>

@@ -21,7 +21,7 @@ public class DemoController {
 
     @ResponseBody
     @RequestMapping(value = "/placeOrder", method = POST)
-    public void placeOrder(@RequestBody String reqBody, HttpSession session) {
+    public String placeOrder(@RequestBody String reqBody, HttpSession session) {
         BankCard bankCard = JsonUtils.fromJson(reqBody, BankCard.class);
         long appId = 1;
         String appPaymentId = RandomStringUtils.randomAlphanumeric(16);
@@ -36,6 +36,9 @@ public class DemoController {
         InitiatePaymentRequest initiatePaymentRequest = new InitiatePaymentRequest(appId, appPaymentId, subject, amount, userIp, notifyUrl, bankCard, risk).addOrder(order).ofUMFBank();
         Response response = client.initiate(initiatePaymentRequest);
         session.setAttribute("paymentId", response.getPaymentId());
+
+        return response.getMessage()==null?"please input the verify code ":response.getMessage();
+
     }
 
     @ResponseBody
@@ -45,6 +48,6 @@ public class DemoController {
         VerifyPaymentRequest verifyPaymentRequest = new VerifyPaymentRequest(paymentId, reqBody);
         System.out.println(verifyPaymentRequest.getPaymentId());
         client.verify(verifyPaymentRequest);
-        return "{\"message\":\"success\"}";
+        return "success";
     }
 }
