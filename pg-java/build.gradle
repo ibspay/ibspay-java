@@ -14,7 +14,7 @@ dependencies {
 
 // Bintray Upload
 def artiId = 'pg-java'
-def scmUrl = "https://github.com/payingcloud/${rootProject.name}"
+def scmUrl = "https://github.com/ibspay/${rootProject.name}"
 
 // Create the pom configuration:
 def pomConfig = {
