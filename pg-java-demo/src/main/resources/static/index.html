@@ -99,7 +99,7 @@
 
         $.ajax({
             type: 'POST',
-            url: "pay/placeOrder",
+            baseUrl: "pay/placeOrder",
             contentType: "application/json; charset=utf-8",
             data: JSON.stringify(bankcard),
             dataType:"text",

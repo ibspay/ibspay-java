@@ -1,0 +1,23 @@
+{
+  "hints": [],
+  "groups": [
+    {
+      "sourceType": "com.ibs.pg.java.demo.PgJavaDemo$Config$Properties",
+      "name": "pg",
+      "type": "com.ibs.pg.java.demo.PgJavaDemo$Config$Properties"
+    }
+  ],
+  "properties": [
+    {
+      "sourceType": "com.ibs.pg.java.demo.PgJavaDemo$Config$Properties",
+      "name": "pg.base-url",
+      "description": "Base Url for Payment Gateway",
+      "type": "java.lang.String"
+    },
+    {
+      "name": "pg.baseUrl",
+      "description": "Description for pg.baseUrl.",
+      "type": "java.lang.String"
+    }
+  ]
+}

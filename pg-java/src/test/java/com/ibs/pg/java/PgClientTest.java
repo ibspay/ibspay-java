@@ -8,6 +8,9 @@ import static org.junit.Assert.assertNotNull;
 
 @Ignore
 public class PgClientTest {
+
+    PgClient pgClient = new PgClient("http://59.110.8.169:8180");
+
     @Test
     public void initiate() throws Exception {
         long appId = 1;
@@ -22,7 +25,6 @@ public class PgClientTest {
         Order order = new Order("2156458", TransCode.TC_01121990, "test", 0.01, true).addOrderItem(orderItem);
         Risk risk = new Risk("郭策华", "15510260561", "北京市", GoodsType.REALGOODS, true);
         InitiatePaymentRequest initiatePaymentRequest = new InitiatePaymentRequest(appId, appPaymentId, subject, amount, userIp, notifyUrl, bankCard, risk).addOrder(order).ofUMFBank();
-        PgClient pgClient = new PgClient();
         Response response = pgClient.initiate(initiatePaymentRequest);
         assertNotNull(response);
 
@@ -33,7 +35,6 @@ public class PgClientTest {
         String paymentId = "a8c5d474a1fc47e88b99cb21203c639d";
         String verifyCode = "011927";
         VerifyPaymentRequest verifyPaymentRequest = new VerifyPaymentRequest(paymentId, verifyCode);
-        PgClient pgClient = new PgClient();
         String response = pgClient.verify(verifyPaymentRequest);
 
     }

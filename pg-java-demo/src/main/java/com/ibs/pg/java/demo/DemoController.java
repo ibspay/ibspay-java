@@ -17,7 +17,11 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 @Controller
 @RequestMapping("/pay")
 public class DemoController {
-    private final PgClient client = new PgClient();
+    private final PgClient client;
+
+    public DemoController(PgClient client) {
+        this.client = client;
+    }
 
     @ResponseBody
     @RequestMapping(value = "/placeOrder", method = POST)
