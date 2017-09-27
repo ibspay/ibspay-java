@@ -1,4 +1,4 @@
-package com.ibs.pg.java.model;
+package com.ibs.pg.java;
 
 public class Response {
     private String paymentId;

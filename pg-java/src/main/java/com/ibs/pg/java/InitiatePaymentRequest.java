@@ -1,5 +1,7 @@
-package com.ibs.pg.java.model;
+package com.ibs.pg.java;
 
+
+import com.ibs.pg.java.model.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,9 +13,7 @@ public class InitiatePaymentRequest {
 
     private long appId;
 
-
     private String appPaymentId;
-
 
     private String subject;
 
@@ -21,11 +21,9 @@ public class InitiatePaymentRequest {
 
     private CurrencyType currency;
 
-
     private ChannelType channel;
 
     private String userIp;
-
 
     private String notifyUrl;
 

@@ -1,4 +1,4 @@
-package com.ibs.pg.java.model;
+package com.ibs.pg.java;
 
 /**
  * @author YQ.Huang
@@ -6,11 +6,6 @@ package com.ibs.pg.java.model;
 public class VerifyPaymentRequest {
     private String paymentId;
     private String code;
-
-    VerifyPaymentRequest() {
-    }
-
-    ;
 
     public VerifyPaymentRequest(String paymentId, String code) {
         this.paymentId = paymentId;

@@ -1,7 +1,10 @@
 package com.ibs.pg.java.demo;
 
 
+import com.ibs.pg.java.InitiatePaymentRequest;
 import com.ibs.pg.java.PgClient;
+import com.ibs.pg.java.Response;
+import com.ibs.pg.java.VerifyPaymentRequest;
 import com.ibs.pg.java.model.*;
 import com.ibs.pg.java.utils.JsonUtils;
 import org.apache.commons.lang3.RandomStringUtils;

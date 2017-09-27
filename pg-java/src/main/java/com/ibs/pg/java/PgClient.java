@@ -1,8 +1,5 @@
 package com.ibs.pg.java;
 
-import com.ibs.pg.java.model.InitiatePaymentRequest;
-import com.ibs.pg.java.model.Response;
-import com.ibs.pg.java.model.VerifyPaymentRequest;
 import com.ibs.pg.java.utils.HttpUtils;
 import com.ibs.pg.java.utils.JsonUtils;
 
