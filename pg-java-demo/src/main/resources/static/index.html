@@ -97,9 +97,8 @@
         }
         bankcard.bankCode = $("#bankType").val().toUpperCase();
 
-        $.ajax({
+        $.ajax("pay/placeOrder", {
             type: 'POST',
-            baseUrl: "pay/placeOrder",
             contentType: "application/json; charset=utf-8",
             data: JSON.stringify(bankcard),
             dataType:"text",
