@@ -18,9 +18,13 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 @RequestMapping("/pay")
 public class DemoController {
     private final PgClient client;
+    private final String paymentNotifyUrl;
+    private final String refundNotifyUrl;
 
-    public DemoController(PgClient client) {
+    public DemoController(PgClient client, PgJavaDemo.Config.Properties props) {
         this.client = client;
+        this.paymentNotifyUrl = props.getPaymentNotifyUrl();
+        this.refundNotifyUrl = props.getRefundNotifyUrl();
     }
 
     @ResponseBody
@@ -33,15 +37,14 @@ public class DemoController {
         String subject = "test";
         double amount = 0.01;
         String userIp = "106.38.120.122";
-        String notifyUrl = "http://106.38.120.122";
         OrderItem orderItem = new OrderItem("03265461", ItemType.CLOTHING, "test", 2, "test", 0.01);
         Order order = new Order(orderId, TransCode.TC_01121990, "test", 0.01, true).addOrderItem(orderItem);
         Risk risk = new Risk("郭策华", "15510260561", "北京市", GoodsType.REALGOODS, true);
-        InitiatePaymentRequest initiatePaymentRequest = new InitiatePaymentRequest(appId, appPaymentId, subject, amount, userIp, notifyUrl, bankCard, risk).addOrder(order).ofUMFBank();
+        InitiatePaymentRequest initiatePaymentRequest = new InitiatePaymentRequest(appId, appPaymentId, subject, amount, userIp, paymentNotifyUrl, bankCard, risk).addOrder(order).ofUMFBank();
         Response response = client.initiate(initiatePaymentRequest);
         session.setAttribute("paymentId", response.getPaymentId());
 
-        return response.getMessage()==null?"please input the verify code ":response.getMessage();
+        return response.getMessage() == null ? "please input the verify code " : response.getMessage();
 
     }
 

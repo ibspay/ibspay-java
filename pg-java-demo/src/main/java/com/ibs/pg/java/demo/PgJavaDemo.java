@@ -22,24 +22,52 @@ public class PgJavaDemo {
 
         @Bean
         PgClient pgClient(Properties properties) {
-            return new PgClient(properties.getBaseUrl());
+            return new PgClient(properties.getPgBaseUrl());
         }
 
         @Validated
-        @ConfigurationProperties(prefix = "pg")
+        @ConfigurationProperties
         public static class Properties {
             /**
              * Base Url for Payment Gateway
              */
             @NotBlank
-            private String baseUrl;
+            private String pgBaseUrl;
 
-            public String getBaseUrl() {
-                return baseUrl;
+            /**
+             * Url for Payment Notification
+             */
+            @NotBlank
+            private String paymentNotifyUrl;
+
+            /**
+             * Url for Refund Notification
+             */
+            @NotBlank
+            private String refundNotifyUrl;
+
+            public String getPgBaseUrl() {
+                return pgBaseUrl;
             }
 
-            public void setBaseUrl(String baseUrl) {
-                this.baseUrl = baseUrl;
+            public void setPgBaseUrl(String pgBaseUrl) {
+                this.pgBaseUrl = pgBaseUrl;
+            }
+
+            public String getPaymentNotifyUrl() {
+                return paymentNotifyUrl;
+            }
+
+            public void setPaymentNotifyUrl(String paymentNotifyUrl) {
+                this.paymentNotifyUrl = paymentNotifyUrl;
+            }
+
+            public String getRefundNotifyUrl() {
+                return refundNotifyUrl;
+            }
+
+            public void setRefundNotifyUrl(String refundNotifyUrl) {
+                this.refundNotifyUrl = refundNotifyUrl;
             }
         }
     }
