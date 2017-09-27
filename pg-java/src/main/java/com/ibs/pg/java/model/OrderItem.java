@@ -6,14 +6,14 @@ package com.ibs.pg.java.model;
  */
 public class OrderItem {
     private String id;    //商品编号
-    private ItemType type;        //商品类型
+    private OrderItemType type;        //商品类型
     private String name;        //商品名称
     private int quantity;    //商品数量
     private String description;    //商品描述
     private double amount;        //商品总金额对象
     private CurrencyType currency;
 
-    public OrderItem(String id, ItemType type, String name, int quantity, String description, double amount) {
+    public OrderItem(String id, OrderItemType type, String name, int quantity, String description, double amount) {
         this.id = id;
         this.type = type;
         this.name = name;
@@ -31,11 +31,11 @@ public class OrderItem {
         this.id = id;
     }
 
-    public ItemType getType() {
+    public OrderItemType getType() {
         return type;
     }
 
-    public void setType(ItemType type) {
+    public void setType(OrderItemType type) {
         this.type = type;
     }
 
