@@ -41,7 +41,7 @@ public class DemoController {
         double amount = 0.01;
         String userIp = "106.38.120.122";
         OrderItem orderItem = new OrderItem("03265461", OrderItemType.CLOTHING, "test", 2, "test", 0.01);
-        Order order = new Order(orderId, TransCode.TC_01121990, "test", 0.01, true).addOrderItem(orderItem);
+        Order order = new Order(orderId, TransCode.TC01121990, "test", 0.01, true).addOrderItem(orderItem);
         Risk risk = new Risk("郭策华", "15510260561", "北京市", GoodsType.REALGOODS, true);
         InitiatePaymentRequest initiatePaymentRequest = new InitiatePaymentRequest(appId, appPaymentId, subject, amount, userIp, paymentNotifyUrl, bankCard, risk).addOrder(order).ofUMFBank();
         Response response = client.initiate(initiatePaymentRequest);
