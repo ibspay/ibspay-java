@@ -2,7 +2,7 @@ package com.ibs.pg.java.model;
 
 public enum GoodsType {
     VIRTUAL,
-    REALGOODS,
+    REAL,
     TICKET,
     ELECTRONICS
 }

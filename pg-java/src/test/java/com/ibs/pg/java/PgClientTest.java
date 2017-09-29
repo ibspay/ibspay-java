@@ -23,7 +23,7 @@ public class PgClientTest {
                 "15510260561", CitizenIdType.IDENTITY_CARD, "130682199304280011");
         OrderItem orderItem = new OrderItem("03265461", OrderItemType.CLOTHING, "test", 2, "test", 0.01);
         Order order = new Order("2156458", TransCode.TC_01121990, "test", 0.01, true).addOrderItem(orderItem);
-        Risk risk = new Risk("郭策华", "15510260561", "北京市", GoodsType.REALGOODS, true);
+        Risk risk = new Risk("郭策华", "15510260561", "北京市", GoodsType.REAL, true);
         InitiatePaymentRequest initiatePaymentRequest = new InitiatePaymentRequest(appId, appPaymentId, subject, amount, userIp, notifyUrl, bankCard, risk).addOrder(order).ofUMFBank();
         Response response = pgClient.initiate(initiatePaymentRequest);
         assertNotNull(response);
