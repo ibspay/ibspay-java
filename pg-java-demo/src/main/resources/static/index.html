@@ -10,8 +10,16 @@
         .CN{
             display: none
         }
-
-
+        .bank{
+            width: 100%;
+            text-align: center;
+            display: none;
+        }
+        .scan{
+            width:100%;
+            text-align: center;
+            display: none;
+        }
     </style>
 </head>
 <body>
@@ -20,7 +28,12 @@
     <option value="CN">中文</option>
 </select>
 </div>
-<div style="text-align: center;">
+<div>
+
+    <h2 style="text-align: left"><span class="CN">选择支付方式</span><span class="EN">Select a payment method</span></h2>
+    <div style="text-align: center">
+        <input id="card" type="radio" name="channel"  value="UMF_BANK_CARD"/><span class="CN">银行卡支付</span><span class="EN">bank card</span>&nbsp<input id="qrcode" type="radio" name="channel" value="UMF_ALIPAY_CODE"/><span class="CN">支付宝扫码</span><span class="EN">AliScan</span><br></div>
+<div class="bank">
     <h1>0.01¥ <span class="EN">Bank card payment</span><span class="CN">银行卡支付结算</span></h1>
     <form action="/pay/placeOrder" method="post">
         <input id="credit" type="radio" name="bankCardType" value="CREDIT_CARD"><span class="CN">信用卡</span><span class="EN">Credit Card</span>&nbsp<input id="deit" type="radio" name="bankCardType" value="DEBIT_CARD" checked><span class="CN">借记卡</span><span class="EN">Debit Card</span><br>
@@ -39,11 +52,22 @@
     </button>
     <button id="confirm" style="width: 90px;height:30px;background-color: cadetblue;border: 0">Confirm</button>
 </div>
-
+<div class="scan">
+    <div style="width: 100%;text-align: center;">
+        <table style="margin: auto">
+        <tr><td><span class="CN">姓名</span><span class="EN">name</span>:</td><td><input id="scanname" type="text"  autocomplete="on"/></td></tr>
+        <tr><td><span class="CN">身份证号</span><span class="EN">ID Number</span>:</td><td><input id="scanId" type="text"  autocomplete="on"/></td></tr>
+        <tr><td><span class="CN">手机号</span><span class="EN">Phone</span>:</td><td><input id="scanphone" type="text"  autocomplete="on"/></td>
+            <td><button id="scanconfirm" style="width: 90px;height:20px;background-color: cadetblue;border: 0">Confirm</button></td></tr>
+    </table><br></div>
+    <div id="code"></div>
+</div>
+</div>
 </body>
 
 
 <script src="https://cdn.bootcss.com/jquery/2.2.2/jquery.min.js"></script>
+<script src="jquery.qrcode.min.js"></script>
 <script>
     $("#lan").bind("change",function(){
         if($(this).val()=="CN"){
@@ -63,6 +87,22 @@
         }
 
     })
+    $("#card").on("click", function () {
+        $(".bank").css({
+            "display":"inline-block"
+        });
+        $(".scan").css({
+            "display":"none"
+        });
+    });
+    $("#qrcode").on("click", function () {
+        $(".bank").css({
+            "display":"none"
+        });
+        $(".scan").css({
+            "display":"inline-block"
+        });
+    });
     $("#valid").on({
         focus:function () {
                 $("#date").css({
@@ -131,5 +171,32 @@
         })}
 
     });
+
+    $("#scanconfirm").on("click", function () {
+        bankcard.holderIdNumber = $("#scanId").val();
+        bankcard.holderName = $("#scanname").val();
+        bankcard.holderPhone = $("#scanphone").val();
+        bankcard.holderIdType = "IDENTITY_CARD";
+        $.ajax({
+            type: 'POST',
+            url: "pay/scanPay",
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify(bankcard),
+            dataType:"text",
+            success: function (data) {
+                $("#code").qrcode({
+                    render: "canvas", //也可以替换为table
+                    width: 100,
+                    height: 100,
+                    text:data
+                });
+                console.log(data);
+            },
+            error: function (err) {
+                console.log(err);
+            }
+        });
+    });
+
 </script>
 </html>

@@ -60,4 +60,24 @@ public class DemoController {
         client.verify(verifyPaymentRequest);
         return "success";
     }
+
+    @ResponseBody
+    @RequestMapping("/scanPay")
+    public String initiateScanPay(@RequestBody String reqBody){
+        BankCard bankCard = JsonUtils.fromJson(reqBody, BankCard.class);
+        long appId = 1;
+        String appPaymentId = RandomStringUtils.randomAlphanumeric(16);
+        String orderId = RandomStringUtils.randomAlphanumeric(6);
+        String subject = "test";
+        double amount = 0.01;
+        String userIp = "106.38.120.122";
+        String notifyUrl = "http://106.38.120.122";
+        OrderItem orderItem = new OrderItem("03265461", OrderItemType.CLOTHING, "test", 2, "test", 0.01);
+        Order order = new Order(orderId, TransCode.TC01121990, "test", 0.01, true).addOrderItem(orderItem);
+        Risk risk = new Risk("郭策华", "15510260561", "北京市", GoodsType.REAL, true);
+        InitiatePaymentRequest initiatePaymentRequest = new InitiatePaymentRequest(appId, appPaymentId, subject, amount, userIp, notifyUrl, bankCard, risk).addOrder(order).ofUMFAli();
+        String json=JsonUtils.toJson(initiatePaymentRequest);
+        Response response = client.initiate(initiatePaymentRequest);
+        return response.getQrCodeUrl();
+    }
 }

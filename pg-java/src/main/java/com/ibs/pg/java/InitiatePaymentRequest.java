@@ -55,7 +55,10 @@ public class InitiatePaymentRequest {
         channel = ChannelType.UMF_BANK_CARD;
         return this;
     }
-
+    public InitiatePaymentRequest ofUMFAli(){
+        channel=ChannelType.UMF_ALIPAY_CODE;
+        return this;
+    }
     public long getAppId() {
         return appId;
     }
