@@ -7,6 +7,7 @@ import com.ibs.pg.java.Response;
 import com.ibs.pg.java.VerifyPaymentRequest;
 import com.ibs.pg.java.model.*;
 import com.ibs.pg.java.utils.JsonUtils;
+
 import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -82,6 +83,8 @@ public class DemoController {
         InitiatePaymentRequest initiatePaymentRequest = new InitiatePaymentRequest(appId, appPaymentId, subject, amount, userIp, notifyUrl, payerInfo, risk).addOrder(order).ofUMFAli();
         String json = JsonUtils.toJson(initiatePaymentRequest);
         Response response = client.initiate(initiatePaymentRequest);
+        if(null==response.getMessage())
+            throw new BadRequest(response.getMessage());
         return response.getQrCodeUrl();
     }
 }

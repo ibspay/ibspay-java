@@ -173,10 +173,9 @@
     });
 
     $("#scanconfirm").on("click", function () {
-        bankcard.holderIdNumber = $("#scanId").val();
-        bankcard.holderName = $("#scanname").val();
-        bankcard.holderPhone = $("#scanphone").val();
-        bankcard.holderIdType = "IDENTITY_CARD";
+        bankcard.IdNumber = $("#scanId").val();
+        bankcard.name = $("#scanname").val();
+        bankcard.phone = $("#scanphone").val();
         $.ajax({
             type: 'POST',
             url: "pay/scanPay",
@@ -193,6 +192,7 @@
                 console.log(data);
             },
             error: function (err) {
+                alert(err);
                 console.log(err);
             }
         });
