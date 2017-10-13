@@ -82,7 +82,7 @@ public class DemoController {
         Risk risk = new Risk("郭策华", "15510260561", "北京市", GoodsType.REAL, true);
         InitiatePaymentRequest initiatePaymentRequest = new InitiatePaymentRequest(appId, appPaymentId, subject, amount, userIp, notifyUrl, payerInfo, risk).addOrder(order).ofUMFAli();
         Response response = client.initiate(initiatePaymentRequest);
-        if(null==response.getMessage())
+        if(null!=response.getMessage())
             throw new BadRequest(response.getMessage());
         return response.getQrCodeUrl();
     }

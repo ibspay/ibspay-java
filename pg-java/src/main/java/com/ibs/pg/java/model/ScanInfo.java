@@ -2,7 +2,7 @@ package com.ibs.pg.java.model;
 
 public class ScanInfo {
     private String name;
-    private String IdNumber;
+    private String idNumber;
     private String phone;
 
     public String getName() {
@@ -14,11 +14,11 @@ public class ScanInfo {
     }
 
     public String getIdNumber() {
-        return IdNumber;
+        return idNumber;
     }
 
     public void setIdNumber(String idNumber) {
-        IdNumber = idNumber;
+        this.idNumber = idNumber;
     }
 
     public String getPhone() {
