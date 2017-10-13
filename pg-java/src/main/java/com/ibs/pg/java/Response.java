@@ -2,16 +2,16 @@ package com.ibs.pg.java;
 
 public class Response {
     private String paymentId;
-    private String qrCodeUrl;
+    private String scanCodeUrl;
     private String status;
     private String message;
 
-    public String getQrCodeUrl() {
-        return qrCodeUrl;
+    public String getScanCodeUrl() {
+        return scanCodeUrl;
     }
 
-    public void setQrCodeUrl(String qrCodeUrl) {
-        this.qrCodeUrl = qrCodeUrl;
+    public void setScanCodeUrl(String scanCodeUrl) {
+        this.scanCodeUrl = scanCodeUrl;
     }
 
     public String getStatus() {

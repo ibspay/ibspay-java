@@ -84,6 +84,6 @@ public class DemoController {
         Response response = client.initiate(initiatePaymentRequest);
         if(null!=response.getMessage())
             throw new BadRequest(response.getMessage());
-        return response.getQrCodeUrl();
+        return response.getScanCodeUrl();
     }
 }
