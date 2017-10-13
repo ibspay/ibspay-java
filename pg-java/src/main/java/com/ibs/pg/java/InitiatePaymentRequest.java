@@ -27,20 +27,20 @@ public class InitiatePaymentRequest {
 
     private String notifyUrl;
 
-    private BankCard bankCard;
+    private PayerInfo payerInfo;
 
     private List<Order> orders;
 
     private Risk risk;
 
-    public InitiatePaymentRequest(long appId, String appPaymentId, String subject, double amount, String userIp, String notifyUrl, BankCard bankCard, Risk risk) {
+    public InitiatePaymentRequest(long appId, String appPaymentId, String subject, double amount, String userIp, String notifyUrl, PayerInfo payerInfo, Risk risk) {
         this.appId = appId;
         this.appPaymentId = appPaymentId;
         this.subject = subject;
         this.amount = amount;
         this.userIp = userIp;
         this.notifyUrl = notifyUrl;
-        this.bankCard = bankCard;
+        this.payerInfo = payerInfo;
         this.risk = risk;
         this.currency = CurrencyType.CNY;
         this.orders = new ArrayList<Order>();
@@ -107,14 +107,6 @@ public class InitiatePaymentRequest {
         this.notifyUrl = notifyUrl;
     }
 
-    public BankCard getBankCard() {
-        return bankCard;
-    }
-
-    public void setBankCard(BankCard bankCard) {
-        this.bankCard = bankCard;
-    }
-
     public List<Order> getOrders() {
         return orders;
     }
@@ -145,5 +137,13 @@ public class InitiatePaymentRequest {
 
     public void setRisk(Risk risk) {
         this.risk = risk;
+    }
+
+    public PayerInfo getPayerInfo() {
+        return payerInfo;
+    }
+
+    public void setPayerInfo(PayerInfo payerInfo) {
+        this.payerInfo = payerInfo;
     }
 }

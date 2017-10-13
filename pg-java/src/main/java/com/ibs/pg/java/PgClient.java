@@ -23,4 +23,12 @@ public class PgClient {
         String url = baseUrl + "/api/payment/verify";
         return HttpUtils.doPost(url, json);
     }
+
+    public Response initiateScan(InitiatePaymentRequest initiateRequest){
+        String json=JsonUtils.toJson(initiateRequest);
+        String url=baseUrl+"/api/payment/scanPay";
+        String response= HttpUtils.doPost(url,json);
+        return JsonUtils.fromJson(response,Response.class);
+    }
+
 }
