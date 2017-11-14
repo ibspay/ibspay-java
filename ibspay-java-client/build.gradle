@@ -1,0 +1,102 @@
+apply plugin: 'maven'
+apply plugin: 'maven-publish'
+apply plugin: 'com.jfrog.bintray'
+apply plugin: 'org.springframework.boot'
+bootRepackage.enabled = false
+
+description = 'Java SDK for IBSPay API'
+targetCompatibility = '1.6'
+sourceCompatibility = '1.6'
+
+dependencies {
+    compile "org.apache.httpcomponents:httpclient:$apacheHttpclientVersion"
+    compile "com.fasterxml.jackson.core:jackson-databind:$jacksonVersion"
+    compile "org.apache.commons:commons-lang3:$apacheCommonsLang3Version"
+    compile "commons-logging:commons-logging:$apacheCommonsLoggingVersion"
+
+    testCompile 'junit:junit'
+}
+
+// Bintray Upload
+def scmUrl = "https://github.com/ibspay/${rootProject.name}"
+
+// Create the pom configuration:
+def pomConfig = {
+    licenses {
+        license {
+            name "The Apache Software License, Version 2.0"
+            url "http://www.apache.org/licenses/LICENSE-2.0.txt"
+            distribution "repo"
+        }
+    }
+    developers {
+        developer {
+            id "cvw643"
+            name "Huang Yuqiang"
+            email "hyq@payingcloud.cn"
+        }
+    }
+    scm {
+        url scmUrl
+    }
+}
+
+// Create the publication with the pom configuration:
+publishing {
+    publications {
+        Maven(MavenPublication) {
+            from components.java
+            artifact sourcesJar
+            artifact javadocJar
+            groupId project.group
+            artifactId project.name
+            version = project.version
+            pom.withXml {
+                def root = asNode()
+                root.appendNode('description', project.description)
+                root.appendNode('name', project.name)
+                root.appendNode('url', scmUrl)
+                root.children().last() + pomConfig
+            }
+        }
+    }
+}
+
+task sourcesJar(type: Jar) {
+    from sourceSets.main.java.srcDirs
+    classifier = 'sources'
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    from javadoc.destinationDir
+    classifier = 'javadoc'
+}
+
+artifacts {
+    archives javadocJar
+    archives sourcesJar
+}
+
+bintray {
+    user = "$bintrayUser"
+    key = "$bintrayApiKey"
+    publications = ['Maven']
+    dryRun = false //[Default: false] Whether to run this as dry-run, without deploying
+    publish = true //[Default: false] Whether version should be auto published after an upload
+    override = false //[Default: false] Whether to override version artifacts already published
+    pkg {
+        repo = 'maven'
+        name = project.name
+        desc = project.description
+        userOrg = 'payingcloud'
+        licenses = ['Apache-2.0']
+        vcsUrl = scmUrl + ".git"
+        publicDownloadNumbers = true
+        version {
+            name = project.version
+            gpg {
+                sign = true //Determines whether to GPG sign the files. The default is false
+            }
+        }
+    }
+}

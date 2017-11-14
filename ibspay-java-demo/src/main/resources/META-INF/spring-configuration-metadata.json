@@ -1,0 +1,42 @@
+{
+  "hints": [],
+  "groups": [
+    {
+      "sourceType": "com.ibs.ibspay.client.IbspayConfiguration$Properties",
+      "name": "ibspay",
+      "type": "com.ibs.ibspay.client.IbspayConfiguration$Properties"
+    }
+  ],
+  "properties": [
+    {
+      "sourceType": "com.ibs.ibspay.client.IbspayConfiguration$Properties",
+      "name": "ibspay.base-url",
+      "description": "Base Url for IBSPay",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.ibs.ibspay.client.IbspayConfiguration$Properties",
+      "name": "ibspay.key-id",
+      "description": "Access Key ID for IBSPay",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.ibs.ibspay.client.IbspayConfiguration$Properties",
+      "name": "ibspay.key-secret",
+      "description": "Access Key Secret for IBSPay",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.ibs.ibspay.client.IbspayConfiguration$Properties",
+      "name": "ibspay.payment-notify-url",
+      "description": "Url for Payment Notification",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.ibs.ibspay.client.IbspayConfiguration$Properties",
+      "name": "ibspay.refund-notify-url",
+      "description": "Url for Refund Notification",
+      "type": "java.lang.String"
+    }
+  ]
+}

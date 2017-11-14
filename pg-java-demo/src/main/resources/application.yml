@@ -1,3 +1,0 @@
-pgBaseUrl: http://59.110.8.169:8180
-paymentNotifyUrl: http://59.110.8.169:8000/notification/payment
-refundNotifyUrl: http://59.110.8.169:8000/notification/refund

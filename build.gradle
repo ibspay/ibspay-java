@@ -1,20 +1,18 @@
 buildscript {
     repositories {
+        maven { url 'http://maven.aliyun.com/nexus/content/groups/public' }
         jcenter()
-        maven { url 'http://repo.spring.io/plugins-release' }
+        maven { url 'http://repo.spring.io/plugins-release' } // for propdeps-plugin
     }
     dependencies {
-        classpath 'org.springframework.boot:spring-boot-gradle-plugin:1.5.4.RELEASE'
-        classpath 'io.spring.gradle:propdeps-plugin:0.0.9.RELEASE'
-        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7.3'
-        classpath 'com.bmuschko:gradle-docker-plugin:3.1.0'
+        classpath "org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}"
+        classpath "io.spring.gradle:propdeps-plugin:${propdepsPluginVersion}"
+        classpath "com.jfrog.bintray.gradle:gradle-bintray-plugin:${gradleBintrayPluginVersion}"
+        classpath "com.bmuschko:gradle-docker-plugin:${gradleDockerPluginVersion}"
     }
 }
 
 subprojects {
-
-    group 'cn.payingcloud'
-    version '1.0.0'
 
     apply plugin: 'java'
 
@@ -22,15 +20,7 @@ subprojects {
 
     repositories {
         mavenLocal()
+        maven { url 'http://maven.aliyun.com/nexus/content/groups/public' }
         jcenter()
-    }
-
-    apply plugin: 'com.bmuschko.docker-remote-api'
-    docker {
-        registryCredentials {
-            url = 'registry-internal.cn-beijing.aliyuncs.com'
-            username = project.hasProperty('dockerUser') ? project.property('dockerUser') : '<dockerUser>'
-            password = project.hasProperty('dockerPassword') ? project.property('dockerPassword') : '<dockerPassword>'
-        }
     }
 }

@@ -1,3 +1,3 @@
-rootProject.name = 'pg-java'
-include ':pg-java'
-include ':pg-java-demo'
+rootProject.name = 'ibspay-java'
+include ':ibspay-java-client'
+include ':ibspay-java-demo'
