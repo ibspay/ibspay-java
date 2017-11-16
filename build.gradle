@@ -7,8 +7,8 @@ buildscript {
     dependencies {
         classpath "org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}"
         classpath "io.spring.gradle:propdeps-plugin:${propdepsPluginVersion}"
-        classpath "com.jfrog.bintray.gradle:gradle-bintray-plugin:${gradleBintrayPluginVersion}"
-        classpath "com.bmuschko:gradle-docker-plugin:${gradleDockerPluginVersion}"
+        classpath "com.jfrog.bintray.gradle:gradle-bintray-plugin:${bintrayPluginVersion}"
+        classpath "com.bmuschko:gradle-docker-plugin:${dockerPluginVersion}"
     }
 }
 

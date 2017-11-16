@@ -11,7 +11,7 @@ import static org.junit.Assert.assertNotNull;
 @Ignore
 public class IbspayClientTest {
 
-    IbspayClient client = new IbspayClient("http://59.110.8.169:8180", "keyId", "keySecret");
+    IbspayClient client = new IbspayClient("http://localhost:8081", "KEY", "SECRET");
 
     @Test
     public void initiate() throws Exception {

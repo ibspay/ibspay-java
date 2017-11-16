@@ -21,12 +21,12 @@ public class Order extends BaseModel {
     /**
      * 金额
      */
-    private double amount;
+    private Double amount;
 
     /**
      * 是否报关
      */
-    private boolean customs;
+    private Boolean customs;
 
     /**
      * 发票号
@@ -54,19 +54,19 @@ public class Order extends BaseModel {
         this.transCode = transCode;
     }
 
-    public double getAmount() {
+    public Double getAmount() {
         return amount;
     }
 
-    public void setAmount(double amount) {
+    public void setAmount(Double amount) {
         this.amount = amount;
     }
 
-    public boolean isCustoms() {
+    public Boolean isCustoms() {
         return customs;
     }
 
-    public void setCustoms(boolean customs) {
+    public void setCustoms(Boolean customs) {
         this.customs = customs;
     }
 

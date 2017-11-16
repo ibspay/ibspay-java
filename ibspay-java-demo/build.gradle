@@ -6,9 +6,9 @@ apply plugin: 'propdeps-eclipse'
 
 dependencies {
     compile project(':ibspay-java-client')
-    compile "org.apache.commons:commons-lang3:$apacheCommonsLang3Version"
-    compile "io.springfox:springfox-swagger2:$springfoxSwagger2Version"
-    compile "io.springfox:springfox-swagger-ui:$springfoxSwagger2Version"
+    compile "org.apache.commons:commons-lang3:$commonsLang3Version"
+    compile "io.springfox:springfox-swagger2:$springfoxVersion"
+    compile "io.springfox:springfox-swagger-ui:$springfoxVersion"
     compile 'org.springframework.boot:spring-boot-starter-web'
     compile 'org.springframework.boot:spring-boot-actuator'
     optional "org.springframework.boot:spring-boot-configuration-processor"

@@ -23,7 +23,7 @@ public class GoodsItem extends BaseModel {
     /**
      * 商品数量
      */
-    private int quantity;
+    private Integer quantity;
 
     /**
      * 商品描述
@@ -33,7 +33,7 @@ public class GoodsItem extends BaseModel {
     /**
      * 商品价格
      */
-    private double price;
+    private Double price;
 
     public String getGoodsNo() {
         return goodsNo;
@@ -59,11 +59,11 @@ public class GoodsItem extends BaseModel {
         this.goodsName = goodsName;
     }
 
-    public int getQuantity() {
+    public Integer getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(int quantity) {
+    public void setQuantity(Integer quantity) {
         this.quantity = quantity;
     }
 
@@ -75,11 +75,11 @@ public class GoodsItem extends BaseModel {
         this.description = description;
     }
 
-    public double getPrice() {
+    public Double getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 }

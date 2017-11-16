@@ -1,6 +1,5 @@
 package com.ibs.ibspay.client.model;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -26,7 +25,7 @@ public class InitiatePaymentRequest extends BaseModel {
     /**
      * 订单金额
      */
-    private double amount;
+    private Double amount;
 
     /**
      * 支付方式
@@ -77,11 +76,11 @@ public class InitiatePaymentRequest extends BaseModel {
         this.subject = subject;
     }
 
-    public double getAmount() {
+    public Double getAmount() {
         return amount;
     }
 
-    public void setAmount(double amount) {
+    public void setAmount(Double amount) {
         this.amount = amount;
     }
 

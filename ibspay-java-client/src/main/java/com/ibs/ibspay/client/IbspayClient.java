@@ -22,14 +22,14 @@ public class IbspayClient {
     private static final String HEADER_SIGN = "x-ibspay-sign";
 
     private final String url;
-    private final String keyId;
-    private final String keySecret;
+    private final String accessKey;
+    private final String accessSecret;
     private final HttpClient httpClient = HttpClients.createDefault();
 
-    public IbspayClient(String baseUrl, String keyId, String keySecret) {
+    public IbspayClient(String baseUrl, String accessKey, String accessSecret) {
         this.url = baseUrl + "/v1/open";
-        this.keyId = keyId;
-        this.keySecret = keySecret;
+        this.accessKey = accessKey;
+        this.accessSecret = accessSecret;
     }
 
     public InitiatePaymentResponse initiate(InitiatePaymentRequest request) {
@@ -45,9 +45,9 @@ public class IbspayClient {
 
     private String post(String json, RequestAction action) {
         String nonce = System.currentTimeMillis() + "";
-        String sign = SignUtils.sign(keyId, action, nonce, json, keySecret);
+        String sign = SignUtils.sign(accessKey, action, nonce, json, accessSecret);
         Header[] headers = new BasicHeader[]{
-                new BasicHeader(HEADER_KEY, keyId),
+                new BasicHeader(HEADER_KEY, accessKey),
                 new BasicHeader(HEADER_NONCE, nonce),
                 new BasicHeader(HEADER_ACTION, action.toString()),
                 new BasicHeader(HEADER_SIGN, sign)};
