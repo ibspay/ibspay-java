@@ -1,6 +1,6 @@
 package com.ibs.ibspay.client.utils;
 
-import com.ibs.ibspay.client.model.RequestAction;
+import com.ibs.ibspay.api.RequestAction;
 import org.apache.commons.codec.digest.DigestUtils;
 
 import java.io.UnsupportedEncodingException;

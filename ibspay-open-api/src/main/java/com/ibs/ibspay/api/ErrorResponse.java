@@ -1,4 +1,4 @@
-package com.ibs.ibspay.client.model;
+package com.ibs.ibspay.api;
 
 import java.util.List;
 

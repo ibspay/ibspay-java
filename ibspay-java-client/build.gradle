@@ -9,6 +9,7 @@ targetCompatibility = '1.6'
 sourceCompatibility = '1.6'
 
 dependencies {
+    compile project(":ibspay-open-api")
     compile "org.apache.httpcomponents:httpclient:$httpclientVersion"
     compile "com.fasterxml.jackson.core:jackson-databind:$jacksonVersion"
     compile "org.apache.commons:commons-lang3:$commonsLang3Version"

@@ -1,9 +1,9 @@
-package com.ibs.ibspay.client.model;
+package com.ibs.ibspay.api;
 
 /**
  * @author YQ.Huang
  */
-public class ConfirmPaymentRequest {
+public class ConfirmPaymentRequest extends BaseModel {
     private String paymentId;
     private String code;
 

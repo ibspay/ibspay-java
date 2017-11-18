@@ -1,4 +1,4 @@
-package com.ibs.ibspay.client.model;
+package com.ibs.ibspay.api;
 
 public enum TransCode {
     TC01121990,  // 货物贸易	网络购物（报关）

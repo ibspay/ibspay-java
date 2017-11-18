@@ -1,6 +1,6 @@
 package com.ibs.ibspay.client;
 
-import com.ibs.ibspay.client.model.ErrorResponse;
+import com.ibs.ibspay.api.ErrorResponse;
 
 /**
  * @author York Huang

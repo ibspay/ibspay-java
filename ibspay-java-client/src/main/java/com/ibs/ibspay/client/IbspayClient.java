@@ -1,6 +1,6 @@
 package com.ibs.ibspay.client;
 
-import com.ibs.ibspay.client.model.*;
+import com.ibs.ibspay.api.*;
 import com.ibs.ibspay.client.utils.JsonUtils;
 import com.ibs.ibspay.client.utils.SignUtils;
 import org.apache.http.Header;

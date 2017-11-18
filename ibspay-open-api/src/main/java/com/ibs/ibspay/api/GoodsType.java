@@ -1,4 +1,4 @@
-package com.ibs.ibspay.client.model;
+package com.ibs.ibspay.api;
 
 /**
  * 商品类型

@@ -4,26 +4,30 @@
     <meta charset="UTF-8">
     <title>PGDemo</title>
     <style>
-        .date{
+        .date {
             display: none
         }
-        .CN{
+
+        .CN {
             display: none
         }
-        .bank{
+
+        .bank {
             width: 100%;
             text-align: center;
             display: none;
         }
-        .scan{
-            width:100%;
+
+        .scan {
+            width: 100%;
             text-align: center;
             display: none;
         }
     </style>
 </head>
 <body>
-<div id="head" style=" weight:100%; height:30px; background-color: aqua;text-align: left">&nbsp;&nbsp;&nbsp;<select id="lan">
+<div id="head" style=" weight:100%; height:30px; background-color: aqua;text-align: left">&nbsp;&nbsp;&nbsp;<select
+        id="lan">
     <option value="EN" style="border: 0">English</option>
     <option value="CN">中文</option>
 </select>
@@ -32,36 +36,75 @@
 
     <h2 style="text-align: left"><span class="CN">选择支付方式</span><span class="EN">Select a payment method</span></h2>
     <div style="text-align: center">
-        <input id="card" type="radio" name="channel"  value="UMF_BANK_CARD"/><span class="CN">银行卡支付</span><span class="EN">bank card</span>&nbsp<input id="qrcode" type="radio" name="channel" value="UMF_ALIPAY_CODE"/><span class="CN">支付宝扫码</span><span class="EN">AliScan</span><br></div>
-<div class="bank">
-    <h1>0.01¥ <span class="EN">Bank card payment</span><span class="CN">银行卡支付结算</span></h1>
-    <form action="/pay/placeOrder" method="post">
-        <input id="credit" type="radio" name="bankCardType" value="CREDIT_CARD"><span class="CN">信用卡</span><span class="EN">Credit Card</span>&nbsp<input id="deit" type="radio" name="bankCardType" value="DEBIT_CARD" checked><span class="CN">借记卡</span><span class="EN">Debit Card</span><br>
-        <span class="CN">&nbsp银行卡号</span><span class="EN">Card Number</span>：<input id="cardNumber" type="text" name="number" autocomplete="on"/><br><br>
-        <span class="CN">&nbsp银行代码</span><span class="EN">&nbsp&nbsp&nbsp&nbspBank Code</span>：<input id="bankType" type="text" name="bankcode" autocomplete="on"><br><br>
-    <div id="cdd" style="display:none">
-        <span class="CN">银行安全码</span><span class="EN">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspCVV2</span>：<input id="cvv2" type="text"><br><br>
-        <span class="CN">银行有效期</span><span class="EN">&nbsp&nbsp&nbsp&nbspValid Date</span>：<input id="valid" type="text"><span id="date" class="date">example："1701"</span><br><br>
+        <input id="card" type="radio" name="channel" value="UMF_BANK_CARD"/><span class="CN">银行卡支付</span><span
+            class="EN">bank card</span>&nbsp<input id="qrcode" type="radio" name="channel"
+                                                   value="UMF_ALIPAY_CODE"/><span class="CN">支付宝扫码</span><span
+            class="EN">AliScan</span><br></div>
+    <div class="bank">
+        <h1>0.01¥ <span class="EN">Bank card payment</span><span class="CN">银行卡支付结算</span></h1>
+        <form action="/pay/placeOrder" method="post">
+            <input id="credit" type="radio" name="bankCardType" value="CREDIT_CARD"><span class="CN">信用卡</span><span
+                class="EN">Credit Card</span>&nbsp<input id="deit" type="radio" name="bankCardType" value="DEBIT_CARD"
+                                                         checked><span class="CN">借记卡</span><span
+                class="EN">Debit Card</span><br>
+            <span class="CN">&nbsp银行卡号</span><span class="EN">Card Number</span>：<input id="cardNumber" type="text"
+                                                                                        name="number"
+                                                                                        autocomplete="on"/><br><br>
+            <span class="CN">&nbsp银行代码</span><span class="EN">&nbsp&nbsp&nbsp&nbspBank Code</span>：<input id="bankType"
+                                                                                                          type="text"
+                                                                                                          name="bankcode"
+                                                                                                          autocomplete="on"><br><br>
+            <div id="cdd" style="display:none">
+                <span class="CN">银行安全码</span><span class="EN">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspCVV2</span>：<input
+                    id="cvv2" type="text"><br><br>
+                <span class="CN">银行有效期</span><span class="EN">&nbsp&nbsp&nbsp&nbspValid Date</span>：<input id="valid"
+                                                                                                           type="text"><span
+                    id="date" class="date">example："1701"</span><br><br>
+            </div>
+            <span class="CN">&nbsp&nbsp&nbsp&nbsp持卡人</span><span class="EN">Holder Name</span>：<input id="name"
+                                                                                                      type="text"
+                                                                                                      name="payername"
+                                                                                                      autocomplete="on"/><br><br>
+            <span class="CN">&nbsp身份证号</span><span class="EN">&nbsp&nbsp&nbsp&nbspID Number</span>：<input id="idNumber"
+                                                                                                          type="text"
+                                                                                                          name="citizenIdNumber"
+                                                                                                          autocomplete="on"/><br><br>
+            <span class="CN">银行预留手机号</span><span class="EN">Bank Reserved Phone</span>：<input type="text" id="phone"
+                                                                                              name="phone"
+                                                                                              autocomplete="on"/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<br><br>
+            &nbsp&nbsp&nbsp<span class="CN">验证码</span><span class="EN">Verify Code</span>：<input id="verifyCode"
+                                                                                                 type="text"
+                                                                                                 name="verifyCode"
+                                                                                                 autocomplete="on"/><br><br>
+        </form>
+        <button id="verify" value="获取验证码" style="width: 90px;height:30px;background-color: cadetblue;border: 0">Verify
+        </button>
+        <button id="confirm" style="width: 90px;height:30px;background-color: cadetblue;border: 0">Confirm</button>
     </div>
-        <span class="CN">&nbsp&nbsp&nbsp&nbsp持卡人</span><span class="EN">Holder Name</span>：<input id="name" type="text" name="payername" autocomplete="on"/><br><br>
-        <span class="CN">&nbsp身份证号</span><span class="EN">&nbsp&nbsp&nbsp&nbspID Number</span>：<input id="idNumber" type="text" name="citizenIdNumber" autocomplete="on"/><br><br>
-        <span class="CN">银行预留手机号</span><span class="EN">Bank Reserved Phone</span>：<input type="text" id="phone" name="phone" autocomplete="on"/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<br><br>
-        &nbsp&nbsp&nbsp<span class="CN">验证码</span><span class="EN">Verify Code</span>：<input id="verifyCode" type="text" name="verifyCode" autocomplete="on"/><br><br>
-    </form>
-    <button id="verify" value="获取验证码" style="width: 90px;height:30px;background-color: cadetblue;border: 0">Verify
-    </button>
-    <button id="confirm" style="width: 90px;height:30px;background-color: cadetblue;border: 0">Confirm</button>
-</div>
-<div class="scan">
-    <div style="width: 100%;text-align: center;">
-        <table style="margin: auto">
-        <tr><td><span class="CN">姓名</span><span class="EN">name</span>:</td><td><input id="scanname" type="text"  autocomplete="on"/></td></tr>
-        <tr><td><span class="CN">身份证号</span><span class="EN">ID Number</span>:</td><td><input id="scanId" type="text"  autocomplete="on"/></td></tr>
-        <tr><td><span class="CN">手机号</span><span class="EN">Phone</span>:</td><td><input id="scanphone" type="text"  autocomplete="on"/></td>
-            <td><button id="scanconfirm" style="width: 90px;height:20px;background-color: cadetblue;border: 0">Confirm</button></td></tr>
-    </table><br></div>
-    <div id="code"></div>
-</div>
+    <div class="scan">
+        <div style="width: 100%;text-align: center;">
+            <table style="margin: auto">
+                <tr>
+                    <td><span class="CN">姓名</span><span class="EN">name</span>:</td>
+                    <td><input id="scanname" type="text" autocomplete="on"/></td>
+                </tr>
+                <tr>
+                    <td><span class="CN">身份证号</span><span class="EN">ID Number</span>:</td>
+                    <td><input id="scanId" type="text" autocomplete="on"/></td>
+                </tr>
+                <tr>
+                    <td><span class="CN">手机号</span><span class="EN">Phone</span>:</td>
+                    <td><input id="scanphone" type="text" autocomplete="on"/></td>
+                    <td>
+                        <button id="scanconfirm" style="width: 90px;height:20px;background-color: cadetblue;border: 0">
+                            Confirm
+                        </button>
+                    </td>
+                </tr>
+            </table>
+            <br></div>
+        <div id="code"></div>
+    </div>
 </div>
 </body>
 
@@ -69,49 +112,49 @@
 <script src="https://cdn.bootcss.com/jquery/2.2.2/jquery.min.js"></script>
 <script src="jquery.qrcode.min.js"></script>
 <script>
-    $("#lan").bind("change",function(){
-        if($(this).val()=="CN"){
+    $("#lan").bind("change", function () {
+        if ($(this).val() == "CN") {
             $(".CN").css({
-                "display":"inline-block"
+                "display": "inline-block"
             });
             $(".EN").css({
-                "display":"none"
+                "display": "none"
             })
-        }else{
+        } else {
             $(".CN").css({
-                "display":"none"
+                "display": "none"
             });
             $(".EN").css({
-                "display":"inline-block"
+                "display": "inline-block"
             })
         }
 
     })
     $("#card").on("click", function () {
         $(".bank").css({
-            "display":"inline-block"
+            "display": "inline-block"
         });
         $(".scan").css({
-            "display":"none"
+            "display": "none"
         });
     });
     $("#qrcode").on("click", function () {
         $(".bank").css({
-            "display":"none"
+            "display": "none"
         });
         $(".scan").css({
-            "display":"inline-block"
+            "display": "inline-block"
         });
     });
     $("#valid").on({
-        focus:function () {
-                $("#date").css({
-                    "display":"inline-block"
-                })
-            },
-        blur:function () {
+        focus: function () {
             $("#date").css({
-                "display":"none"
+                "display": "inline-block"
+            })
+        },
+        blur: function () {
+            $("#date").css({
+                "display": "none"
             })
         }
     });
@@ -141,7 +184,7 @@
             type: 'POST',
             contentType: "application/json; charset=utf-8",
             data: JSON.stringify(bankcard),
-            dataType:"text",
+            dataType: "text",
             success: function (data) {
                 alert(data);
                 console.log(data);
@@ -154,21 +197,22 @@
 
     $("#confirm").on("click", function () {
         var verify_code = $("#verifyCode").val();
-        if(verify_code==null||verify_code==""){
+        if (verify_code == null || verify_code == "") {
             alert("please input the verify code")
-        }else{
-        $.ajax("pay/confirm", {
-            method: "POST",
-            contentType: "text/xml; charset=utf-8",
-            data: verify_code,
-            success: function (data) {
-                alert("success");
-                console.log(data);
-            },
-            error: function (err) {
-                console.log(err);
-            }
-        })}
+        } else {
+            $.ajax("pay/confirm", {
+                method: "POST",
+                contentType: "text/xml; charset=utf-8",
+                data: verify_code,
+                success: function (data) {
+                    alert("success");
+                    console.log(data);
+                },
+                error: function (err) {
+                    console.log(err);
+                }
+            })
+        }
 
     });
 
@@ -181,13 +225,13 @@
             url: "pay/scanPay",
             contentType: "application/json; charset=utf-8",
             data: JSON.stringify(bankcard),
-            dataType:"text",
+            dataType: "text",
             success: function (data) {
                 $("#code").qrcode({
                     render: "canvas", //也可以替换为table
                     width: 100,
                     height: 100,
-                    text:data
+                    text: data
                 });
                 console.log(data);
             },

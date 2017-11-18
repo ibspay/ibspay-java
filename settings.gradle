@@ -1,3 +1,4 @@
 rootProject.name = 'ibspay-java'
+include ':ibspay-open-api'
 include ':ibspay-java-client'
 include ':ibspay-java-demo'
