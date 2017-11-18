@@ -33,6 +33,11 @@ public class InitiatePaymentRequest extends BaseModel {
     private PaymentMethod paymentMethod;
 
     /**
+     * 支付银行卡，使用银行卡支付时需要
+     */
+    private BankCard bankCard;
+
+    /**
      * 交易成功异步通知地址
      */
     private String notifyUrl;
@@ -90,6 +95,14 @@ public class InitiatePaymentRequest extends BaseModel {
 
     public void setPaymentMethod(PaymentMethod paymentMethod) {
         this.paymentMethod = paymentMethod;
+    }
+
+    public BankCard getBankCard() {
+        return bankCard;
+    }
+
+    public void setBankCard(BankCard bankCard) {
+        this.bankCard = bankCard;
     }
 
     public String getNotifyUrl() {
