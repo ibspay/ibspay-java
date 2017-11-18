@@ -4,7 +4,7 @@ apply plugin: 'com.jfrog.bintray'
 apply plugin: 'org.springframework.boot'
 bootRepackage.enabled = false
 
-description = 'Java SDK for IBSPay API'
+description = 'Java SDK for IBSPay Open API'
 targetCompatibility = '1.6'
 sourceCompatibility = '1.6'
 
