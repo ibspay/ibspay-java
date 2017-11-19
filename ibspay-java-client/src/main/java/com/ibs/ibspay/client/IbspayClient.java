@@ -27,7 +27,7 @@ public class IbspayClient {
     private final HttpClient httpClient = HttpClients.createDefault();
 
     public IbspayClient(String baseUrl, String accessKey, String accessSecret) {
-        this.url = baseUrl + "/v1/open";
+        this.url = baseUrl + "/open";
         this.accessKey = accessKey;
         this.accessSecret = accessSecret;
     }
