@@ -21,7 +21,7 @@ public class IbspayException extends RuntimeException {
     }
 
     public IbspayException(ErrorResponse errorResponse) {
-        super(errorResponse.getTitle());
+        super("[" + errorResponse.getTitle() + "] " + errorResponse.getDetail());
     }
 
     public ErrorResponse getErrorResponse() {

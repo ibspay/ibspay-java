@@ -38,9 +38,16 @@ public class IbspayClient {
         return JsonUtils.fromJson(response, InitiatePaymentResponse.class);
     }
 
-    public void confirm(ConfirmPaymentRequest request) {
+    public ConfirmPaymentResponse confirm(ConfirmPaymentRequest request) {
         String json = JsonUtils.toJson(request);
         String response = post(json, RequestAction.CONFIRM_PAYMENT);
+        return JsonUtils.fromJson(response, ConfirmPaymentResponse.class);
+    }
+
+    public InitiateRefundResponse refund(InitiateRefundRequest request) {
+        String json = JsonUtils.toJson(request);
+        String response = post(json, RequestAction.INITIATE_REFUND);
+        return JsonUtils.fromJson(response, InitiateRefundResponse.class);
     }
 
     private String post(String json, RequestAction action) {

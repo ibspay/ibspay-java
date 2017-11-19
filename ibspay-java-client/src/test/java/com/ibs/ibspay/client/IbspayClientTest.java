@@ -6,8 +6,6 @@ import org.junit.Test;
 
 import java.util.Collections;
 
-import static org.junit.Assert.assertNotNull;
-
 @Ignore
 public class IbspayClientTest {
 
@@ -56,19 +54,34 @@ public class IbspayClientTest {
         request.setPayer(payer);
         request.setReceiver(receiver);
         request.setBankCard(bankCard);
+        request.setPaymentMethod(PaymentMethod.BAND_CARD);
 
         InitiatePaymentResponse response = client.initiate(request);
-        assertNotNull(response);
+        System.out.println("response = " + response);
 
     }
 
     @Test
     public void confirm() throws Exception {
-        String paymentId = "a8c5d474a1fc47e88b99cb21203c639d";
-        String verifyCode = "011927";
-        ConfirmPaymentRequest request = new ConfirmPaymentRequest(paymentId, verifyCode);
-//        String response = client.confirm(request);
+        ConfirmPaymentRequest request = new ConfirmPaymentRequest();
+        request.setPaymentId("3cbf5ee81cbe40788ff86f47f439c603");
+        request.setCode("791124");
 
+        ConfirmPaymentResponse response = client.confirm(request);
+        System.out.println("response = " + response);
     }
 
+    @Test
+    public void refund() throws Exception {
+        InitiateRefundRequest request = new InitiateRefundRequest();
+//        request.setAppId(1L);
+//        request.setAppPaymentId("");
+        request.setAppRefundId("TEST" + System.currentTimeMillis());
+        request.setPaymentId("3cbf5ee81cbe40788ff86f47f439c603");
+        request.setSubject("TEST");
+        request.setNotifyUrl("http://106.38.120.122");
+
+        InitiateRefundResponse response = client.refund(request);
+        System.out.println("response = " + response);
+    }
 }

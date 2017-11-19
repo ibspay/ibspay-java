@@ -38,7 +38,7 @@ public class InitiatePaymentRequest extends BaseModel {
     private BankCard bankCard;
 
     /**
-     * 交易成功异步通知地址
+     * 支付成功异步通知地址
      */
     private String notifyUrl;
 
