@@ -50,6 +50,18 @@ public class IbspayClient {
         return JsonUtils.fromJson(response, InitiateRefundResponse.class);
     }
 
+    public QueryPaymentResponse queryPayment(QueryPaymentRequest request) {
+        String json = JsonUtils.toJson(request);
+        String response = post(json, RequestAction.QUERY_PAYMENT);
+        return JsonUtils.fromJson(response, QueryPaymentResponse.class);
+    }
+
+    public QueryRefundResponse queryRefund(QueryRefundRequest request) {
+        String json = JsonUtils.toJson(request);
+        String response = post(json, RequestAction.QUERY_REFUND);
+        return JsonUtils.fromJson(response, QueryRefundResponse.class);
+    }
+
     private String post(String json, RequestAction action) {
         String nonce = System.currentTimeMillis() + "";
         String sign = SignUtils.sign(accessKey, action, nonce, json, accessSecret);

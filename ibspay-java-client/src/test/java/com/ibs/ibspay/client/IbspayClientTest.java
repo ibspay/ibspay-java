@@ -84,4 +84,20 @@ public class IbspayClientTest {
         InitiateRefundResponse response = client.refund(request);
         System.out.println("response = " + response);
     }
+
+    @Test
+    public void queryPayment() throws Exception {
+        QueryPaymentRequest request = new QueryPaymentRequest();
+        request.setPaymentId("3cbf5ee81cbe40788ff86f47f439c603");
+        QueryPaymentResponse response = client.queryPayment(request);
+        System.out.println("response = " + response);
+    }
+
+    @Test
+    public void queryRefund() throws Exception {
+        QueryRefundRequest request = new QueryRefundRequest();
+        request.setRefundId("6a3ff6826b2a4b6e96ff3ad933fe85fd");
+        QueryRefundResponse response = client.queryRefund(request);
+        System.out.println("response = " + response);
+    }
 }
