@@ -1,6 +1,6 @@
 ibspay:
-  baseUrl: http://localhost:8082
-  paymentNotifyUrl: http://localhost:8083/notification/payment
-  refundNotifyUrl: http://localhost:8083/notification/refund
+  baseUrl: http://localhost:40000
+  paymentNotifyUrl: http://localhost:8080/notification/payment
+  refundNotifyUrl: http://localhost:8080/notification/refund
   key-id: TEST
   key-secret: TEST

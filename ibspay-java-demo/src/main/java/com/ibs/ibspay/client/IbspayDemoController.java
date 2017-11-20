@@ -31,8 +31,8 @@ public class IbspayDemoController {
         InitiatePaymentRequest initiatePaymentRequest= JsonUtils.fromJson(reqBody,InitiatePaymentRequest.class);
         Receiver receiver = new Receiver();
         receiver.setAddress("北京市");
-        receiver.setName("黄玉强");
-        receiver.setMobile("13691229097");
+        receiver.setName("郭策华");
+        receiver.setMobile("15510260561");
         initiatePaymentRequest.setReceiver(receiver);
         InitiatePaymentResponse response = client.initiate(initiatePaymentRequest);
         session.setAttribute("paymentId",response.getPaymentId());
@@ -56,7 +56,7 @@ public class IbspayDemoController {
         InitiatePaymentRequest initiatePaymentRequest= JsonUtils.fromJson(reqBody,InitiatePaymentRequest.class);
         Receiver receiver = new Receiver();
         receiver.setAddress("北京市");
-        receiver.setName("黄玉强");
+        receiver.setName("郭策华");
         receiver.setMobile("13691229097");
         initiatePaymentRequest.setReceiver(receiver);
         InitiatePaymentResponse response = client.initiate(initiatePaymentRequest);

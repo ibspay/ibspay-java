@@ -200,8 +200,9 @@
             bankcard.cvv2 = $("#cvv2").val();
             bankcard.validDate = $("#valid").val();
         }
-        initiatePaymentRequest.bankCrad=bankcard;
+        initiatePaymentRequest.bankCard=bankcard;
         initiatePaymentRequest.payer=payer;
+        initiatePaymentRequest.paymentMethod="BAND_CARD";
         $.ajax("pay/placeOrder", {
             type: 'POST',
             contentType: "application/json; charset=utf-8",
@@ -228,6 +229,7 @@
                 data: code,
                 success: function (data) {
                     alert("success");
+                    location.reload();
                     console.log(data);
                 },
                 error: function (err) {
@@ -243,6 +245,7 @@
         payer.name = $("#scanname").val();
         payer.mobile = $("#scanphone").val();
         initiatePaymentRequest.payer=payer;
+        initiatePaymentRequest.paymentMethod="ALIPAY_SCAN";
         $.ajax({
             type: 'POST',
             url: "pay/scanPay",
