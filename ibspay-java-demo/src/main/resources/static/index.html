@@ -50,10 +50,6 @@
             <span class="CN">&nbsp银行卡号</span><span class="EN">Card Number</span>：<input id="cardNumber" type="text"
                                                                                         name="number"
                                                                                         autocomplete="on"/><br><br>
-            <span class="CN">&nbsp银行代码</span><span class="EN">&nbsp&nbsp&nbsp&nbspBank Code</span>：<input id="bankType"
-                                                                                                          type="text"
-                                                                                                          name="bankcode"
-                                                                                                          autocomplete="on"><br><br>
             <div id="cdd" style="display:none">
                 <span class="CN">银行安全码</span><span class="EN">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspCVV2</span>：<input
                     id="cvv2" type="text"><br><br>
@@ -165,25 +161,51 @@
     $("#deit").on("click", function () {
         $("#cdd").hide();
     });
+    var item =new Object();
+    item.goodsNo="TEST";
+    item.goodsType="CLOTHING";
+    item.goodsName="TEST";
+    item.quantity="1";
+    item.description="TEST";
+    item.price="0.01";
+    var items=new Array();
+    items[0] = item;
+    var order =new Object();
+    order.orderNo= "TEST"+new Date().getTime();
+    order.transCode="TC01122030";
+    order.amount=0.01;
+    order.customs="false";
+    order.invoiceNo="test";
+    order.items=items;
+    var orders =new Array();
+    orders[0]=order;
     var bankcard = new Object();
+    var payer =new Object();
+    payer.ip="106.38.120.122";
+    var initiatePaymentRequest=new Object();
+    initiatePaymentRequest.subject="test";
+    initiatePaymentRequest.appId=1;
+    initiatePaymentRequest.amount=0.01;
+    initiatePaymentRequest.appPaymentId="TEST"+new Date().getTime();
+    initiatePaymentRequest.notifyUrl="http://106.38.120.122";
+    initiatePaymentRequest.orders=orders;
     $("#verify").on("click", function () {
         bankcard.number = $("#cardNumber").val();
-        bankcard.holderIdNumber = $("#idNumber").val();
-        bankcard.holderName = $("#name").val();
-        bankcard.holderPhone = $("#phone").val();
-        bankcard.holderIdType = "IDENTITY_CARD";
-        var payer = new Object();
-        payer.payment_method = $("input[name='bankCardType']:checked").val();
-        if (payer.payment_method == "CREDIT_CARD") {
+        payer.citizenId = $("#idNumber").val();
+        payer.name = $("#name").val();
+        payer.mobile = $("#phone").val();
+        var pay = new Object();
+        pay.payment_method = $("input[name='bankCardType']:checked").val();
+        if (pay.payment_method == "CREDIT_CARD") {
             bankcard.cvv2 = $("#cvv2").val();
             bankcard.validDate = $("#valid").val();
         }
-        bankcard.bankCode = $("#bankType").val().toUpperCase();
-
+        initiatePaymentRequest.bankCrad=bankcard;
+        initiatePaymentRequest.payer=payer;
         $.ajax("pay/placeOrder", {
             type: 'POST',
             contentType: "application/json; charset=utf-8",
-            data: JSON.stringify(bankcard),
+            data: JSON.stringify(initiatePaymentRequest),
             dataType: "text",
             success: function (data) {
                 alert(data);
@@ -196,14 +218,14 @@
     });
 
     $("#confirm").on("click", function () {
-        var verify_code = $("#verifyCode").val();
-        if (verify_code == null || verify_code == "") {
+        var code = $("#verifyCode").val();
+        if (code == null || code == "") {
             alert("please input the verify code")
         } else {
             $.ajax("pay/confirm", {
                 method: "POST",
                 contentType: "text/xml; charset=utf-8",
-                data: verify_code,
+                data: code,
                 success: function (data) {
                     alert("success");
                     console.log(data);
@@ -217,14 +239,15 @@
     });
 
     $("#scanconfirm").on("click", function () {
-        bankcard.idNumber = $("#scanId").val();
-        bankcard.name = $("#scanname").val();
-        bankcard.phone = $("#scanphone").val();
+        payer.citizenId = $("#scanId").val();
+        payer.name = $("#scanname").val();
+        payer.mobile = $("#scanphone").val();
+        initiatePaymentRequest.payer=payer;
         $.ajax({
             type: 'POST',
             url: "pay/scanPay",
             contentType: "application/json; charset=utf-8",
-            data: JSON.stringify(bankcard),
+            data: JSON.stringify(initiatePaymentRequest),
             dataType: "text",
             success: function (data) {
                 $("#code").qrcode({
