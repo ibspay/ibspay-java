@@ -1,4 +1,4 @@
 ibspay:
-  baseUrl: https://api.ibspay.com
-  paymentNotifyUrl: http://demo.ibspay.com/notification/payment
-  refundNotifyUrl: http://demo.ibspay.com/notification/refund
+  url: https://api.ibspay.com
+  payment-notify-url: http://demo.ibspay.com/notification/payment
+  refund-notify-url: http://demo.ibspay.com/notification/refund

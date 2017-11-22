@@ -19,7 +19,7 @@ public class IbspayDemoController {
     private final String paymentNotifyUrl;
     private final String refundNotifyUrl;
 
-    public IbspayDemoController(IbspayClient client, IbspayConfiguration.Properties props) {
+    public IbspayDemoController(IbspayClient client, IbspayProperties props) {
         this.client = client;
         this.paymentNotifyUrl = props.getPaymentNotifyUrl();
         this.refundNotifyUrl = props.getRefundNotifyUrl();
@@ -28,21 +28,22 @@ public class IbspayDemoController {
     @ResponseBody
     @RequestMapping(value = "/placeOrder", method = POST)
     public String placeOrder(@RequestBody String reqBody, HttpSession session) {
-        InitiatePaymentRequest initiatePaymentRequest= JsonUtils.fromJson(reqBody,InitiatePaymentRequest.class);
+        InitiatePaymentRequest initiatePaymentRequest = JsonUtils.fromJson(reqBody, InitiatePaymentRequest.class);
+        initiatePaymentRequest.setNotifyUrl(paymentNotifyUrl);
         Receiver receiver = new Receiver();
         receiver.setAddress("北京市");
         receiver.setName("郭策华");
         receiver.setMobile("15510260561");
         initiatePaymentRequest.setReceiver(receiver);
         InitiatePaymentResponse response = client.initiate(initiatePaymentRequest);
-        session.setAttribute("paymentId",response.getPaymentId());
+        session.setAttribute("paymentId", response.getPaymentId());
         return "success";
     }
 
     @ResponseBody
     @RequestMapping("/confirm")
     public String confirmPay(@RequestBody String code, HttpSession session) {
-        String paymentId=(String)session.getAttribute("paymentId");
+        String paymentId = (String) session.getAttribute("paymentId");
         ConfirmPaymentRequest request = new ConfirmPaymentRequest();
         request.setPaymentId(paymentId);
         request.setCode(code);
@@ -53,7 +54,8 @@ public class IbspayDemoController {
     @ResponseBody
     @RequestMapping("/scanPay")
     public String initiateScanPay(@RequestBody String reqBody) {
-        InitiatePaymentRequest initiatePaymentRequest= JsonUtils.fromJson(reqBody,InitiatePaymentRequest.class);
+        InitiatePaymentRequest initiatePaymentRequest = JsonUtils.fromJson(reqBody, InitiatePaymentRequest.class);
+        initiatePaymentRequest.setNotifyUrl(paymentNotifyUrl);
         Receiver receiver = new Receiver();
         receiver.setAddress("北京市");
         receiver.setName("郭策华");
