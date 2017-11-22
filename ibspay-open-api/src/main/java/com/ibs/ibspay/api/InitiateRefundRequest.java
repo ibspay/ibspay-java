@@ -6,11 +6,6 @@ package com.ibs.ibspay.api;
 public class InitiateRefundRequest extends BaseModel {
 
     /**
-     * 应用ID，商户在Ibspay内创建应用获得
-     */
-    private Long appId;
-
-    /**
      * 应用支付ID，商户提供
      */
     private String appPaymentId;
@@ -34,14 +29,6 @@ public class InitiateRefundRequest extends BaseModel {
      * 退款成功异步通知地址
      */
     private String notifyUrl;
-
-    public Long getAppId() {
-        return appId;
-    }
-
-    public void setAppId(Long appId) {
-        this.appId = appId;
-    }
 
     public String getAppPaymentId() {
         return appPaymentId;

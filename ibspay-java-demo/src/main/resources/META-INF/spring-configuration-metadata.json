@@ -2,40 +2,40 @@
   "hints": [],
   "groups": [
     {
-      "sourceType": "com.ibs.ibspay.client.IbspayConfiguration$Properties",
+      "sourceType": "com.ibs.ibspay.client.IbspayProperties",
       "name": "ibspay",
-      "type": "com.ibs.ibspay.client.IbspayConfiguration$Properties"
+      "type": "com.ibs.ibspay.client.IbspayProperties"
     }
   ],
   "properties": [
     {
-      "sourceType": "com.ibs.ibspay.client.IbspayConfiguration$Properties",
-      "name": "ibspay.base-url",
-      "description": "Base Url for IBSPay",
+      "sourceType": "com.ibs.ibspay.client.IbspayProperties",
+      "name": "ibspay.access-key",
+      "description": "Access Key for Ibspay",
       "type": "java.lang.String"
     },
     {
-      "sourceType": "com.ibs.ibspay.client.IbspayConfiguration$Properties",
-      "name": "ibspay.key-id",
-      "description": "Access Key ID for IBSPay",
+      "sourceType": "com.ibs.ibspay.client.IbspayProperties",
+      "name": "ibspay.access-secret",
+      "description": "Access Secret for Ibspay",
       "type": "java.lang.String"
     },
     {
-      "sourceType": "com.ibs.ibspay.client.IbspayConfiguration$Properties",
-      "name": "ibspay.key-secret",
-      "description": "Access Key Secret for IBSPay",
-      "type": "java.lang.String"
-    },
-    {
-      "sourceType": "com.ibs.ibspay.client.IbspayConfiguration$Properties",
+      "sourceType": "com.ibs.ibspay.client.IbspayProperties",
       "name": "ibspay.payment-notify-url",
       "description": "Url for Payment Notification",
       "type": "java.lang.String"
     },
     {
-      "sourceType": "com.ibs.ibspay.client.IbspayConfiguration$Properties",
+      "sourceType": "com.ibs.ibspay.client.IbspayProperties",
       "name": "ibspay.refund-notify-url",
       "description": "Url for Refund Notification",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.ibs.ibspay.client.IbspayProperties",
+      "name": "ibspay.url",
+      "description": "Base Url for Ibspay",
       "type": "java.lang.String"
     }
   ]

@@ -1,6 +1,9 @@
+server:
+  port: 50000
+
 ibspay:
-  baseUrl: http://localhost:40000
-  paymentNotifyUrl: http://localhost:8080/notification/payment
-  refundNotifyUrl: http://localhost:8080/notification/refund
-  key-id: TEST
-  key-secret: TEST
+  url: http://localhost:40000
+  access-key: test
+  access-secret: test
+  payment-notify-url: http://localhost:${server.port}/notification/payment
+  refund-notify-url: http://localhost:${server.port}/notification/refund
