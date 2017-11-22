@@ -23,6 +23,11 @@
             text-align: center;
             display: none;
         }
+        .wechatscan{
+            width: 100%;
+            text-align: center;
+            display: none;
+        }
     </style>
 </head>
 <body>
@@ -39,7 +44,9 @@
         <input id="card" type="radio" name="channel" value="UMF_BANK_CARD"/><span class="CN">银行卡支付</span><span
             class="EN">bank card</span>&nbsp<input id="qrcode" type="radio" name="channel"
                                                    value="UMF_ALIPAY_CODE"/><span class="CN">支付宝扫码</span><span
-            class="EN">AliScan</span><br></div>
+            class="EN">AliPay</span><input id="qrcode2" type="radio" name="channel"
+                                           value="UMF_ALIPAY_CODE"/><span class="CN">微信扫码支付</span><span
+            class="EN">WeChatPay</span><br></div>
     <div class="bank">
         <h1>0.01¥ <span class="EN">Bank card payment</span><span class="CN">银行卡支付结算</span></h1>
         <form action="/pay/placeOrder" method="post">
@@ -101,6 +108,30 @@
             <br></div>
         <div id="code"></div>
     </div>
+    <div class="wechatscan">
+        <div style="width: 100%;text-align: center;">
+            <table style="margin: auto">
+                <tr>
+                    <td><span class="CN">姓名</span><span class="EN">name</span>:</td>
+                    <td><input id="wechatname" type="text" autocomplete="on"/></td>
+                </tr>
+                <tr>
+                    <td><span class="CN">身份证号</span><span class="EN">ID Number</span>:</td>
+                    <td><input id="wechatscanId" type="text" autocomplete="on"/></td>
+                </tr>
+                <tr>
+                    <td><span class="CN">手机号</span><span class="EN">Phone</span>:</td>
+                    <td><input id="wechatphone" type="text" autocomplete="on"/></td>
+                    <td>
+                        <button id="wechatconfirm" style="width: 90px;height:20px;background-color: cadetblue;border: 0">
+                            Confirm
+                        </button>
+                    </td>
+                </tr>
+            </table>
+            <br></div>
+        <div id="wechatcode"></div>
+    </div>
 </div>
 </body>
 
@@ -133,12 +164,30 @@
         $(".scan").css({
             "display": "none"
         });
+        $(".wechatscan").css({
+            "display": "none"
+        });
+
     });
     $("#qrcode").on("click", function () {
         $(".bank").css({
             "display": "none"
         });
         $(".scan").css({
+            "display": "inline-block"
+        });
+        $(".wechatscan").css({
+            "display": "none"
+        });
+    });
+    $("#qrcode2").on("click", function () {
+        $(".bank").css({
+            "display": "none"
+        });
+        $(".scan").css({
+            "display": "none"
+        });
+        $(".wechatscan").css({
             "display": "inline-block"
         });
     });
@@ -186,7 +235,6 @@
     initiatePaymentRequest.subject="test";
     initiatePaymentRequest.appId=1;
     initiatePaymentRequest.amount=0.01;
-    initiatePaymentRequest.appPaymentId="TEST"+new Date().getTime();
     initiatePaymentRequest.notifyUrl="http://106.38.120.122";
     initiatePaymentRequest.orders=orders;
     $("#verify").on("click", function () {
@@ -200,6 +248,7 @@
             bankcard.cvv2 = $("#cvv2").val();
             bankcard.validDate = $("#valid").val();
         }
+        initiatePaymentRequest.appPaymentId="TEST"+new Date().getTime();
         initiatePaymentRequest.bankCard=bankcard;
         initiatePaymentRequest.payer=payer;
         initiatePaymentRequest.paymentMethod="BAND_CARD";
@@ -246,6 +295,8 @@
         payer.mobile = $("#scanphone").val();
         initiatePaymentRequest.payer=payer;
         initiatePaymentRequest.paymentMethod="ALIPAY_SCAN";
+        initiatePaymentRequest.appPaymentId="TEST"+new Date().getTime();
+        initiatePaymentRequest.orders[0].orderNo="TEST"+new Date().getTime();
         $.ajax({
             type: 'POST',
             url: "pay/scanPay",
@@ -253,7 +304,39 @@
             data: JSON.stringify(initiatePaymentRequest),
             dataType: "text",
             success: function (data) {
+                $("#code").html("");
                 $("#code").qrcode({
+                    render: "canvas", //也可以替换为table
+                    width: 100,
+                    height: 100,
+                    text: data
+                });
+                console.log(data);
+            },
+            error: function (err) {
+                alert(err);
+                console.log(err);
+            }
+        });
+    });
+
+    $("#wechatconfirm").on("click", function () {
+        payer.citizenId = $("#wechatscanId").val();
+        payer.name = $("#wechatname").val();
+        payer.mobile = $("#wechatphone").val();
+        initiatePaymentRequest.payer=payer;
+        initiatePaymentRequest.paymentMethod="WECHAT_SCAN";
+        initiatePaymentRequest.appPaymentId="TEST"+new Date().getTime();
+        initiatePaymentRequest.orders[0].orderNo="TEST"+new Date().getTime();
+        $.ajax({
+            type: 'POST',
+            url: "pay/scanPay",
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify(initiatePaymentRequest),
+            dataType: "text",
+            success: function (data) {
+                $("#wechatcode").html("");
+                $("#wechatcode").qrcode({
                     render: "canvas", //也可以替换为table
                     width: 100,
                     height: 100,
