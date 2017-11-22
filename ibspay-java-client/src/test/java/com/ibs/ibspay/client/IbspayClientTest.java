@@ -47,7 +47,6 @@ public class IbspayClientTest {
         InitiatePaymentRequest request = new InitiatePaymentRequest();
         request.setSubject("TEST");
         request.setAmount(0.01);
-        request.setAppId(1L);
         request.setAppPaymentId("TEST" + System.currentTimeMillis());
         request.setNotifyUrl("http://106.38.120.122");
         request.setOrders(Collections.singletonList(order));
@@ -74,8 +73,6 @@ public class IbspayClientTest {
     @Test
     public void refund() throws Exception {
         InitiateRefundRequest request = new InitiateRefundRequest();
-//        request.setAppId(1L);
-//        request.setAppPaymentId("");
         request.setAppRefundId("TEST" + System.currentTimeMillis());
         request.setPaymentId("3cbf5ee81cbe40788ff86f47f439c603");
         request.setSubject("TEST");
@@ -135,7 +132,6 @@ public class IbspayClientTest {
         InitiatePaymentRequest request = new InitiatePaymentRequest();
         request.setSubject("TEST");
         request.setAmount(0.01);
-        request.setAppId(1L);
         request.setAppPaymentId("TEST" + System.currentTimeMillis());
         request.setNotifyUrl("http://106.38.120.122");
         request.setOrders(Collections.singletonList(order));

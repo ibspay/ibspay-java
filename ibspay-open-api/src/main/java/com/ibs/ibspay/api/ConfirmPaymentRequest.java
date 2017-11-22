@@ -4,10 +4,6 @@ package com.ibs.ibspay.api;
  * @author YQ.Huang
  */
 public class ConfirmPaymentRequest extends BaseModel {
-    /**
-     * 应用ID，商户在Ibspay内创建应用获得
-     */
-    private Long appId;
 
     /**
      * 应用支付ID，商户提供
@@ -23,14 +19,6 @@ public class ConfirmPaymentRequest extends BaseModel {
      * 短信验证码
      */
     private String code;
-
-    public Long getAppId() {
-        return appId;
-    }
-
-    public void setAppId(Long appId) {
-        this.appId = appId;
-    }
 
     public String getAppPaymentId() {
         return appPaymentId;

@@ -8,11 +8,6 @@ import java.util.List;
 public class InitiatePaymentRequest extends BaseModel {
 
     /**
-     * 应用ID，商户在IBSPay内创建应用获得
-     */
-    private Long appId;
-
-    /**
      * 应用支付ID，商户提供
      */
     private String appPaymentId;
@@ -56,14 +51,6 @@ public class InitiatePaymentRequest extends BaseModel {
      * 订单列表，每个订单只能是相同的商品类型
      */
     private List<Order> orders;
-
-    public Long getAppId() {
-        return appId;
-    }
-
-    public void setAppId(Long appId) {
-        this.appId = appId;
-    }
 
     public String getAppPaymentId() {
         return appPaymentId;
