@@ -17,4 +17,10 @@ public class IbspayNotificationController {
         System.out.println("Received Payment Notification: body = [" + body + "]");
         return "ok";
     }
+
+    @PostMapping("/refund")
+    public String onRefundSucceed(@RequestBody String body) {
+        System.out.println("Received Refund Notification: body = [" + body + "]");
+        return "ok";
+    }
 }
