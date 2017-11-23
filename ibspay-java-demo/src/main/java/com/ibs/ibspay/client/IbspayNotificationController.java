@@ -1,9 +1,7 @@
 package com.ibs.ibspay.client;
 
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.ibs.ibspay.client.utils.SignUtils;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author YQ.Huang
@@ -12,15 +10,31 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/notification")
 public class IbspayNotificationController {
 
+    private final IbspayProperties props;
+
+    public IbspayNotificationController(IbspayProperties props) {
+        this.props = props;
+    }
+
     @PostMapping("/payment")
-    public String onPaymentSucceed(@RequestBody String body) {
+    public String onPaymentSucceed(@RequestHeader("x-ibspay-key") String key,
+                                   @RequestHeader("x-ibspay-nonce") String nonce,
+                                   @RequestHeader("x-ibspay-sign") String sign,
+                                   @RequestBody String body) {
         System.out.println("Received Payment Notification: body = [" + body + "]");
+        boolean verify = SignUtils.verify(sign, key, nonce, body, props.getAccessSecret());
+        System.out.println("verify = " + verify);
         return "ok";
     }
 
     @PostMapping("/refund")
-    public String onRefundSucceed(@RequestBody String body) {
+    public String onRefundSucceed(@RequestHeader("x-ibspay-key") String key,
+                                  @RequestHeader("x-ibspay-nonce") String nonce,
+                                  @RequestHeader("x-ibspay-sign") String sign,
+                                  @RequestBody String body) {
         System.out.println("Received Refund Notification: body = [" + body + "]");
+        boolean verify = SignUtils.verify(sign, key, nonce, body, props.getAccessSecret());
+        System.out.println("verify = " + verify);
         return "ok";
     }
 }

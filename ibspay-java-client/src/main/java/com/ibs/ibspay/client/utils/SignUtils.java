@@ -13,12 +13,19 @@ public class SignUtils {
     }
 
     public static String sign(String key, RequestAction action, String nonce, String body, String secret) {
-        String signString = key + action + nonce + body + secret;
+        return sign(key + action + nonce + body + secret);
+    }
+
+    public static boolean verify(String sign, String key, String nonce, String body, String secret) {
+        String expected = sign(key + nonce + body + secret);
+        return expected.equals(sign);
+    }
+
+    private static String sign(String signString) {
         try {
             return DigestUtils.md5Hex(signString.getBytes("UTF-8"));
         } catch (UnsupportedEncodingException e) {
             throw new RuntimeException(e);
         }
     }
-
 }
