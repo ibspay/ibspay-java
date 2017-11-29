@@ -1,6 +1,6 @@
 package com.ibs.ibspay.client;
 
-import com.ibs.ibspay.api.*;
+import com.ibs.ibspay.open.api.*;
 import org.junit.Ignore;
 import org.junit.Test;
 

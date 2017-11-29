@@ -1,8 +1,8 @@
 package com.ibs.ibspay.client;
 
-import com.ibs.ibspay.api.*;
-import com.ibs.ibspay.client.utils.JsonUtils;
-import com.ibs.ibspay.client.utils.SignUtils;
+import com.ibs.ibspay.common.model.*;
+import com.ibs.ibspay.common.util.JsonUtils;
+import com.ibs.ibspay.common.util.SignUtils;
 import org.apache.http.Header;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -64,7 +64,7 @@ public class IbspayClient {
 
     private String post(String json, RequestAction action) {
         String nonce = System.currentTimeMillis() + "";
-        String sign = SignUtils.sign(accessKey, action, nonce, json, accessSecret);
+        String sign = SignUtils.sign(accessKey, action.toString(), nonce, json, accessSecret);
         Header[] headers = new BasicHeader[]{
                 new BasicHeader(HEADER_KEY, accessKey),
                 new BasicHeader(HEADER_NONCE, nonce),

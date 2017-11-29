@@ -1,6 +1,6 @@
 package com.ibs.ibspay.client;
 
-import com.ibs.ibspay.client.utils.SignUtils;
+import com.ibs.ibspay.common.util.SignUtils;
 import org.springframework.web.bind.annotation.*;
 
 /**

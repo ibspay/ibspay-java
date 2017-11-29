@@ -1,8 +1,7 @@
 package com.ibs.ibspay.client;
 
-
-import com.ibs.ibspay.api.*;
-import com.ibs.ibspay.client.utils.JsonUtils;
+import com.ibs.ibspay.common.model.*;
+import com.ibs.ibspay.common.util.JsonUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;

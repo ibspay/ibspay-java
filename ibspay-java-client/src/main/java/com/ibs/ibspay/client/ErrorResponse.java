@@ -1,4 +1,6 @@
-package com.ibs.ibspay.api;
+package com.ibs.ibspay.client;
+
+import com.ibs.ibspay.common.model.BaseModel;
 
 import java.util.List;
 
